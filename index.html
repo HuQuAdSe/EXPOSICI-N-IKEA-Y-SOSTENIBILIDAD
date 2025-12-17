@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKEA y Sostenibilidad</title>
+
+<style>
+:root{
+  --blue:#0058a3;
+  --yellow:#ffda1a;
+  --green:#4ade80;
+  --cyan:#38bdf8;
+  --bg:#020617;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.18);
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+}
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Segoe UI,system-ui,sans-serif;
+}
+
+/* BODY */
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
+}
+
+/* FONDO ANIMADO */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,218,26,.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(74,222,128,.22), transparent 45%),
+    linear-gradient(120deg,#020617,#0f172a,#020617);
+  background-size:200% 200%;
+  animation:bgMove 18s ease-in-out infinite alternate;
+  z-index:-1;
+}
+
+@keyframes bgMove{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+
+/* ESTRUCTURA */
+.presentation{
+  height:100vh;
+  display:grid;
+  grid-template-rows:1fr 72px;
+}
+
+/* CONTENEDOR CENTRADO */
+.stage{
+  max-width:1400px;
+  margin:0 auto;
+  width:100%;
+  padding:clamp(1.5rem,3vw,3rem);
+}
+
+/* SLIDES */
+.slide{
+  display:none;
+  height:100%;
+}
+
+.slide.active{
+  display:grid;
+  grid-template-columns:30% 70%;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items:center;
+  animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:none}
+}
+
+/* PANEL VISUAL */
+.visual{
+  height:100%;
+  border-radius:28px;
+  background:#000;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+}
+
+.visual img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity: 2 ;
+}
+
+.visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.85));
+}
+
+/* CONTENIDO */
+.content{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:clamp(1.5rem,3vw,3rem);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  overflow-y:auto;
+}
+
+/* TEXTO */
+h1{
+  font-size:clamp(2rem,4vw,3rem);
+  color:var(--yellow);
+  margin-bottom:.5rem;
+}
+
+h2{
+  font-size:clamp(1.2rem,2.2vw,1.6rem);
+  color:var(--cyan);
+  margin:1rem 0 .3rem;
+}
+
+p,li{
+  font-size:clamp(.85rem,1.2vw,1.05rem);
+  line-height:1.65;
+}
+
+ul{
+  list-style:none;
+  margin-left:.8rem;
+}
+
+li::before{
+  content:"▸";
+  color:var(--green);
+  margin-right:.5rem;
+}
+
+.persona{
+  align-self:flex-start;
+  margin-bottom:1rem;
+  padding:.4rem .9rem;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid var(--border);
+  font-size:.8rem;
+  font-weight:600;
+}
+
+/* VIDEO */
+.video-wrapper{
+  margin-top:1rem;
+  text-align:center;
+}
+
+.video-frame{
+  max-width:520px;
+  aspect-ratio:16/9;
+  margin:0 auto;
+  padding:4px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--yellow),var(--green),var(--cyan));
+}
+
+.video-frame video{
+  width:100%;
+  height:100%;
+  border-radius:16px;
+  background:#000;
+}
+
+.video-note{
+  margin-top:.5rem;
+  font-style:italic;
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+/* CONTROLES */
+.controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+  background:rgba(2,6,23,.75);
+  backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+}
+
+.controls button{
+  padding:.6rem 1.2rem;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--blue),#0284c7);
+  color:#fff;
+}
+
+.controls button:hover{
+  background:linear-gradient(135deg,var(--green),#22c55e);
+  color:#022c22;
+}
+
+.counter{
+  font-size:.8rem;
+  color:var(--muted);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .slide.active{
+    grid-template-columns:1fr;
+  }
+  .visual{
+    height:35vh;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="presentation">
+
+  <div class="stage">
+
+    <!-- SLIDE 1: Introducción -->
+    <div class="slide active">
+      <div class="visual"><img src="1.png"></div>
+      <div class="content">
+        <h1>EXPOSICIÓN – IKEA Y SOSTENIBILIDAD</h1>
+        <p>(2 minutos + 1 min de vídeo)</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Persona 1 -->
+    <div class="slide">
+      <div class="visual"><img src="2.png"></div>
+      <div class="content">
+
+        <h2>Nombre de la empresa</h2>
+        <p>La empresa analizada es IKEA, multinacional sueca fundada en 1943.</p>
+
+        <h2>Actividad</h2>
+        <p>Su actividad principal es la venta de mobiliario y productos de decoración para el hogar a precios asequibles.</p>
+
+        <h2>Sector</h2>
+        <p>Pertenece al sector de muebles y artículos para el hogar.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: 9Rs y vídeo -->
+    <div class="slide">
+      <div class="visual"><img src="3.png"></div>
+      <div class="content">
+        <h2>¿Aplica alguno de los 9Rs?</h2>
+        <p>Sí. IKEA aplica principalmente la R de Reutilización, y también reparación y reciclaje.</p>
+        <p>Un ejemplo claro es su programa de compra y reventa de muebles usados, donde los clientes entregan muebles IKEA antiguos y reciben vales a cambio. Estos muebles se reacondicionan y vuelven al mercado, evitando que terminen en vertederos.</p>
+        <p>Este modelo está alineado con la economía circular y es el tema del vídeo que vamos a mostrar.</p>
+
+        <div class="video-wrapper">
+          <div class="video-frame">
+            <video controls>
+              <source src="video.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="video-note">(Aquí se reproduce el vídeo – 1 minuto)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Plan de sostenibilidad -->
+    <div class="slide">
+      <div class="visual"><img src="4.png"></div>
+      <div class="content">
+
+        <h2>¿Tiene plan de sostenibilidad?</h2>
+        <p>Sí. IKEA cuenta con una estrategia de sostenibilidad con horizonte 2030, centrada en tres grandes áreas:</p>
+        <ul>
+          <li>Vida sana y sostenible</li>
+          <li>Clima, naturaleza y circularidad</li>
+          <li>Sociedad justa e igualitaria</li>
+        </ul>
+        <p>Su objetivo es convertirse en un negocio 100% circular, usando energías renovables y materiales renovables, y desacoplando su crecimiento del consumo de recursos.</p>
+        <p>Fuente: web corporativa de IKEA.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Comunicación y conclusión -->
+    <div class="slide">
+      <div class="visual"><img src="5.png"></div>
+      <div class="content">
+        <h2>¿Cómo lo comunican?</h2>
+        <ul>
+          <li>Su web corporativa</li>
+          <li>Proyectos como Salvemos los Muebles</li>
+          <li>Servicios de tornillería y piezas sueltas gratuitas</li>
+          <li>Iniciativas de autoconsumo energético como Home Solar</li>
+          <li>Campañas y vídeos sobre economía circular</li>
+        </ul>
+        <p>El mensaje se centra en involucrar al consumidor y facilitar hábitos más sostenibles.</p>
+
+        <h2>Conclusión personal</h2>
+        <p>IKEA está dando pasos importantes hacia la economía circular, especialmente en reutilización, reparación y reventa de muebles. Son iniciativas positivas y necesarias en un sector con alto consumo de recursos.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Greenwashing + Referencias -->
+    <div class="slide">
+      <div class="visual"><img src="6.png"></div>
+      <div class="content">
+        <h2>¿Existe greenwashing?</h2>
+        <p>Aquí surge el debate. Aunque IKEA comunica muchas acciones sostenibles, varias investigaciones y artículos periodísticos cuestionan la coherencia entre su discurso y algunas prácticas, especialmente relacionadas con la explotación forestal y el uso de materias primas.</p>
+        <p>Por tanto, podemos concluir que no todo es greenwashing, pero sí existe el riesgo de que la comunicación vaya más rápido que los cambios reales, lo que obliga a mantener una mirada crítica como consumidores.</p>
+
+        <h2>📚 Referencias</h2>
+        <ul>
+          <li><a href="https://www.ikea.com/es/es/this-is-ikea/climate-environment/la-estrategia-de-sostenibilidad-de-ikea-pubfea4c210/" target="_blank">Web de sostenibilidad de IKEA</a></li>
+          <li><a href="https://economiacircularenaccion.org/proyecto/ikea-economia-circular/" target="_blank">Economía circular en IKEA</a></li>
+          <li><a href="https://www.rtve.es/noticias/20240401/investigacion-revela-ikea-se-hace-sueca-con-bosques-del-planeta/16013388.shtml" target="_blank">Artículo RTVE sobre bosques</a></li>
+          <li><a href="https://www.linkedin.com/posts/javiermolinafuster_la-culpa-no-es-solo-de-ikea-es-nuestra-activity-7321050374897827842--kqo/" target="_blank">Debate sobre greenwashing (LinkedIn)</a></li>
+          <li><a href="https://www.marleysmonsters.com/blogs/greenwashing-greenwishing-or-greenhushing/is-ikea-greenwashing" target="_blank">Análisis internacional de greenwashing</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Despedida -->
+<div class="slide">
+  <div class="visual">
+    <img src="7.jpg">
+  </div>
+  <div class="content" style="text-align:center;">
+
+    <h1 style="font-size:clamp(2.5rem,5vw,4rem); line-height:1.2;">
+      Gracias por vuestra atención
+    </h1>
+
+    <p style="
+      margin-top:1.5rem;
+      font-size:clamp(1.1rem,2vw,1.4rem);
+      color:var(--muted);
+      max-width:700px;
+      margin-left:auto;
+      margin-right:auto;
+    ">
+      La sostenibilidad no es solo una estrategia empresarial,<br>
+      también es una responsabilidad compartida como consumidores.
+    </p>
+
+    <p style="
+      margin-top:2rem;
+      font-size:clamp(1rem,1.6vw,1.2rem);
+      color:var(--green);
+      font-weight:600;
+    ">
+      IKEA: avances reales, retos pendientes y una mirada crítica necesaria.
+    </p>
+
+  </div>
+</div>
+    
+
+  </div>
+
+  <!-- CONTROLES -->
+  <div class="controls">
+    <button id="prev">Atrás</button>
+    <span class="counter" id="counter"></span>
+    <button id="next">Siguiente</button>
+    <button id="fs">Pantalla completa</button>
+  </div>
+
+</div>
+
+<script>
+let i=0;
+const slides=document.querySelectorAll('.slide');
+const counter=document.getElementById('counter');
+
+function show(n){
+  slides.forEach(s=>s.classList.remove('active'));
+  slides[n].classList.add('active');
+  counter.textContent=`${n+1} / ${slides.length}`;
+}
+show(0);
+
+document.getElementById('next').onclick=()=>{if(i<slides.length-1)show(++i)};
+document.getElementById('prev').onclick=()=>{if(i>0)show(--i)};
+document.getElementById('fs').onclick=()=>{
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen();
+  }else{
+    document.exitFullscreen();
+  }
+};
+</script>
+
+</body>
+</html>
